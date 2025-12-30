@@ -47,7 +47,11 @@ app.post("/api/register", async (req, res) => {
         });
 
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
-        res.cookie("token", token);
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,  // Required for HTTPS
+            sameSite: 'none'
+        });
 
         res.json({message: "User resistered"});
     } catch (err) {
@@ -65,7 +69,11 @@ app.post("/api/login", async (req, res) => {
     if (!correct) return res.status(400).json({error: "Email or password is wrong"});
 
     const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
-    res.cookie("token", token);
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,  // Required for HTTPS
+        sameSite: 'none'
+    });
 
     res.json({message: "Logged in"});
 });
