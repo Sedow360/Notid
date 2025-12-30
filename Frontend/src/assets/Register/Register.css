@@ -1,0 +1,104 @@
+
+.register-container {
+    width: clamp(300px, 90vw, 400px);
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+
+    background: rgba(0, 20, 40, 0.6); /* semi-transparent dark blue */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+}
+
+h2 {
+    font-size: 4rem;
+    margin-top: 0;
+    margin-bottom: 3.3rem;
+    color: #00d9ff;
+}
+
+.inputs {
+    margin-bottom: 2rem;
+}
+
+.email-wrapper,
+.password-wrapper,
+.name-wrapper {
+    position: relative;
+    margin-bottom: 0.5rem;
+    margin-left: 0;
+}
+
+.inputs input {
+    width: 100%;
+    padding: 12px 12px 12px 40px;
+    border: 1px solid #a0f0ff;
+    border-radius: 25px;
+    font-size: 16px;
+    background-color: transparent;
+    color: #ffffff; /* text color when typing */
+}
+
+.inputs input::placeholder {
+    color: rgba(160, 240, 255, 0.6); /* semi-transparent placeholder */
+}
+
+.inputs input:focus {
+    outline: none;
+    border-color: #00d9ff;
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+}
+
+.inputs i {
+    position: absolute;
+    left: 12px;
+    top: 45%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-style: normal;
+}
+
+.register-btn {
+    width: 50%;
+    padding: 12px;
+    background: transparent;
+    border: 2px solid #00d9ff;
+    border-radius: 25px;
+    color: #00d9ff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease;
+}
+
+.register-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    background: linear-gradient(180deg, 
+        rgba(0, 217, 255, 0.8) 0%, 
+        rgba(0, 217, 255, 0.4) 50%,
+        rgba(0, 217, 255, 0) 100%
+    );
+    transition: height 0.8s ease;
+    z-index: -1;
+    filter: blur(8px);
+}
+
+.register-btn:hover::before {
+    height: 100%;
+}
+
+.register-btn:hover {
+    color: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
+}
