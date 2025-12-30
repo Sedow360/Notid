@@ -53,6 +53,12 @@ function Dashboard() {
         fetchNotes();
     };
 
+    const startEdit = (note: Note) => {
+        setEditId(note._id);
+        setEditTitle(note.title);
+        setEditContent(note.content);
+    };
+
     const updateNote = async () => {
         await fetch(`https://notid-backend.onrender.com/api/notes/${editId}`, {
             method: 'PUT',
