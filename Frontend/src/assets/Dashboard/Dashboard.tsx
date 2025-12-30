@@ -85,11 +85,16 @@ function Dashboard() {
         window.location.href = '/';
     };
 
-     useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        fetchNotes();
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = '/';  // Redirect if no token
+            return;
+        }
+        // eslint-disable-next-line
         fetchUser();
-    }, [fetchNotes, fetchUser]);
+        fetchNotes();
+    }, [fetchUser, fetchNotes]);
 
     return (
     <div style={{minHeight: '100vh', backgroundColor: '#f5f5f5'}}>
