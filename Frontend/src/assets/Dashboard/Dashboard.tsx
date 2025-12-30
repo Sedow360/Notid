@@ -23,7 +23,7 @@ function Dashboard() {
     const [editContent, setEditContent] = useState('');
 
     const fetchUser = useCallback(async () => {
-        const res = await fetch('http://localhost:5000/api/user', {
+        const res = await fetch('https://notid-backend.onrender.com/api/user', {
             credentials: 'include'
         });
         const data = await res.json();
@@ -32,7 +32,7 @@ function Dashboard() {
 
 
     const fetchNotes = useCallback(async () => {
-        const res = await fetch('http://localhost:5000/api/notes', {
+        const res = await fetch('https://notid-backend.onrender.com/api/notes', {
             credentials: 'include'
         });
         const data = await res.json();
@@ -40,7 +40,7 @@ function Dashboard() {
     }, []);
 
     const createNote = async () => {
-        await fetch('http://localhost:5000/api/notes', {
+        await fetch('https://notid-backend.onrender.com/api/notes', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',
@@ -58,7 +58,7 @@ function Dashboard() {
     };
 
     const updateNote = async () => {
-        await fetch(`http://localhost:5000/api/notes/${editId}`, {
+        await fetch(`https://notid-backend.onrender.com/api/notes/${editId}`, {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',
@@ -69,7 +69,7 @@ function Dashboard() {
     };
 
     const deleteNote = async (id: string) => {
-        await fetch(`http://localhost:5000/api/notes/${id}`, {
+        await fetch(`https://notid-backend.onrender.com/api/notes/${id}`, {
             method: 'DELETE',
             credentials: 'include'
         });
@@ -77,7 +77,7 @@ function Dashboard() {
     };
 
     const handleLogout = async () => {
-        await fetch('http://localhost:5000/api/logout', {
+        await fetch('https://notid-backend.onrender.com/api/logout', {
             credentials: 'include'
         });
         window.location.href = '/';  // Redirect to login

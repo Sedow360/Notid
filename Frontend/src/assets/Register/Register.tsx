@@ -10,7 +10,7 @@ function Register() {
     const [error, setError] = useState('');
     
     const handleRegister = async () => {
-        const res = await fetch('http://localhost:5000/api/register', {
+        const res = await fetch('https://notid-backend.onrender.com/api/register', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',  // Important for cookies!
