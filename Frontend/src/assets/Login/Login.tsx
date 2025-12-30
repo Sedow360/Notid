@@ -17,6 +17,8 @@ function Login() {
         });
     
         if(res.ok) {
+            const data = await res.json();
+            localStorage.setItem('token', data.token);
             navigate('/dashboard');
         } else {
             const data = await res.json();

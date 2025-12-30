@@ -21,47 +21,45 @@ function Dashboard() {
     const [editId, setEditId] = useState<string | null>(null);
     const [editTitle, setEditTitle] = useState('');
     const [editContent, setEditContent] = useState('');
+    const token = localStorage.getItem('token');
 
     const fetchUser = useCallback(async () => {
         const res = await fetch('https://notid-backend.onrender.com/api/user', {
-            credentials: 'include'
+            headers: {'Authorization': `Bearer ${token}`}
         });
         const data = await res.json();
         setUser(data);
-    }, []);
-
+    }, [token]);
 
     const fetchNotes = useCallback(async () => {
         const res = await fetch('https://notid-backend.onrender.com/api/notes', {
-            credentials: 'include'
+            headers: {'Authorization': `Bearer ${token}`}
         });
         const data = await res.json();
         setNotes(data);
-    }, []);
+    }, [token]);
 
     const createNote = async () => {
         await fetch('https://notid-backend.onrender.com/api/notes', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
             body: JSON.stringify({title, content})
         });
         setTitle('');
         setContent('');
-        fetchNotes();  // Refresh list
-    };
-
-    const startEdit = (note: Note) => {
-        setEditId(note._id);
-        setEditTitle(note.title);
-        setEditContent(note.content);
+        fetchNotes();
     };
 
     const updateNote = async () => {
         await fetch(`https://notid-backend.onrender.com/api/notes/${editId}`, {
             method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
-            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
             body: JSON.stringify({title: editTitle, content: editContent})
         });
         setEditId(null);
@@ -71,16 +69,14 @@ function Dashboard() {
     const deleteNote = async (id: string) => {
         await fetch(`https://notid-backend.onrender.com/api/notes/${id}`, {
             method: 'DELETE',
-            credentials: 'include'
+            headers: {'Authorization': `Bearer ${token}`}
         });
-        fetchNotes();  // Refresh list
+        fetchNotes();
     };
 
-    const handleLogout = async () => {
-        await fetch('https://notid-backend.onrender.com/api/logout', {
-            credentials: 'include'
-        });
-        window.location.href = '/';  // Redirect to login
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        window.location.href = '/';
     };
 
      useEffect(() => {

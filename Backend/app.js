@@ -18,7 +18,7 @@ app.use(cors({
 }));
 
 function isLoggedIn(req, res, next) {
-    let token = req.cookies.token;
+    const token = req.headers.authorization?.split(' ')[1];
     if (!token) return res.status(401).json({ error: "Not logged in" });
 
     try {
@@ -47,13 +47,7 @@ app.post("/api/register", async (req, res) => {
         });
 
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: true,  // Required for HTTPS
-            sameSite: 'none'
-        });
-
-        res.json({message: "User resistered"});
+        res.json({token, message: "Registered"});
     } catch (err) {
         res.status(500).json({error: err.message});
     }
@@ -69,13 +63,7 @@ app.post("/api/login", async (req, res) => {
     if (!correct) return res.status(400).json({error: "Email or password is wrong"});
 
     const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
-    res.cookie("token", token, {
-        httpOnly: true,
-        secure: true,  // Required for HTTPS
-        sameSite: 'none'
-    });
-
-    res.json({message: "Logged in"});
+    res.json({token, message: "Logged in"});
 });
 
 app.get("/api/notes", isLoggedIn, async (req, res) => {
