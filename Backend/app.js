@@ -13,7 +13,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors({
-    origin: "notid-frontend-e1jvk90u4-ayushs-projects-4645ae36.vercel.app/",
+    origin: "https://notid-frontend.vercel.app/",
     credentials: true
 }));
 
