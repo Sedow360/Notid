@@ -32,9 +32,11 @@ function Dashboard() {
     }, [token]);
 
     const fetchNotes = useCallback(async () => {
+        console.log('Fetching with token:', token?.substring(0, 20));
         const res = await fetch('https://notid-backend.onrender.com/api/notes', {
             headers: {'Authorization': `Bearer ${token}`}
         });
+        console.log('Response status:', res.status);
         const data = await res.json();
         setNotes(data);
     }, [token]);
@@ -86,7 +88,6 @@ function Dashboard() {
     };
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
         if (!token) {
             window.location.href = '/';  // Redirect if no token
             return;
@@ -94,7 +95,7 @@ function Dashboard() {
         // eslint-disable-next-line
         fetchUser();
         fetchNotes();
-    }, [fetchUser, fetchNotes]);
+    }, []);
 
     return (
     <div style={{minHeight: '100vh', backgroundColor: '#f5f5f5'}}>

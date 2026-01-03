@@ -18,6 +18,7 @@ function Login() {
     
         if(res.ok) {
             const data = await res.json();
+            console.log(data.token);
             localStorage.setItem('token', data.token);
             navigate('/dashboard');
         } else {
