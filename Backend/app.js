@@ -18,16 +18,17 @@ app.use(cors({
 }));
 
 function isLoggedIn(req, res, next) {
-    const token = req.headers.authorization?.split(' ')[1];
-    if (!token) return res.status(401).json({ error: "Not logged in" });
-
+    const authHeader = req.headers.authorization;
+    if (!authHeader) return res.status(401).json({error: "No token"});
+    
+    const token = authHeader.split(' ')[1];  // Extract token after "Bearer "
+    
     try {
-        let data = jwt.verify(token, process.env.JWT_SECRET);
+        const data = jwt.verify(token, process.env.JWT_SECRET);
         req.user = data;
         next();
-    }
-    catch(err) {
-        res.status(401).json({ error: "Invalid token" });
+    } catch(err) {
+        return res.status(401).json({error: "Invalid token"});
     }
 }
 
