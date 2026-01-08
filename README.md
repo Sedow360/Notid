@@ -9,7 +9,7 @@
 
 > A full-stack notes application built with the MERN stack, featuring secure authentication, real-time CRUD operations, and seamless deployment across Vercel and Render.
 
-[Live Demo]((https://notid-frontend.vercel.app/))
+[Live Demo](https://notid-frontend.vercel.app/)
 
 ---
 
