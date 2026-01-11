@@ -32,11 +32,9 @@ function Dashboard() {
     }, [token]);
 
     const fetchNotes = useCallback(async () => {
-        console.log('Fetching with token:', token?.substring(0, 20));
         const res = await fetch('https://notid-backend.onrender.com/api/notes', {
             headers: {'Authorization': `Bearer ${token}`}
         });
-        console.log('Response status:', res.status);
         const data = await res.json();
         setNotes(data);
     }, [token]);
