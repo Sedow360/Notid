@@ -18,7 +18,7 @@
 A production-ready notes application that allows users to securely register, authenticate, and manage their personal notes with full CRUD functionality. Built with modern web technologies and deployed on industry-standard cloud platforms, this project demonstrates end-to-end full-stack development skills including authentication, database design, API development, and deployment.
 
 ### ✨ Why This Project?
-
+- Students and professionals often rely on fragmented tools for note-taking that lack secure access, structured storage, and scalability.
 - **Full-Stack Implementation**: Complete separation of concerns with dedicated frontend and backend repositories
 - **Secure Authentication**: JWT-based session management with bcrypt password hashing
 - **Real-Time Updates**: In-place note editing without page refreshes
