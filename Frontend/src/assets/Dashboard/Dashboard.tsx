@@ -182,117 +182,107 @@ function Dashboard() {
                     borderRadius: '10px',
                     boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
                 }}>
-                    {notes.map(note => (
-    <div key={note._id} style={{
-        backgroundColor: 'white',
-        padding: '20px',
-        marginBottom: '15px',
-        borderRadius: '10px',
-        boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
-    }}>
-        {editId === note._id ? (
-            // Edit Mode
-            <>
-                <input 
-                    value={editTitle} 
-                    onChange={(e) => setEditTitle(e.target.value)}
-                    style={{
-                        width: '100%',
-                        padding: '10px',
-                        marginBottom: '10px',
-                        border: '1px solid #ddd',
+            {editId === note._id ? (
+                // Edit Mode
+                <>
+                    <input 
+                        value={editTitle} 
+                        onChange={(e) => setEditTitle(e.target.value)}
+                        style={{
+                            width: '100%',
+                            padding: '10px',
+                            marginBottom: '10px',
+                            border: '1px solid #ddd',
+                            borderRadius: '5px',
+                            fontSize: '18px',
+                            fontWeight: 'bold'
+                        }}
+                    />
+                    <textarea 
+                        value={editContent} 
+                        onChange={(e) => setEditContent(e.target.value)}
+                        style={{
+                            width: '100%',
+                            padding: '10px',
+                            marginBottom: '10px',
+                            border: '1px solid #ddd',
+                            borderRadius: '5px',
+                            minHeight: '100px',
+                            fontSize: '16px'
+                        }}
+                    />
+                    <button onClick={updateNote} style={{
+                        padding: '8px 20px',
+                        backgroundColor: '#27ae60',
+                        color: 'white',
+                        border: 'none',
                         borderRadius: '5px',
-                        fontSize: '18px',
-                        fontWeight: 'bold'
-                    }}
-                />
-                <textarea 
-                    value={editContent} 
-                    onChange={(e) => setEditContent(e.target.value)}
-                    style={{
-                        width: '100%',
-                        padding: '10px',
-                        marginBottom: '10px',
-                        border: '1px solid #ddd',
+                        cursor: 'pointer',
+                        marginRight: '10px'
+                    }}>Save</button>
+                    <button onClick={() => setEditId(null)} style={{
+                        padding: '8px 20px',
+                        backgroundColor: '#95a5a6',
+                        color: 'white',
+                        border: 'none',
                         borderRadius: '5px',
-                        minHeight: '100px',
-                        fontSize: '16px'
-                    }}
-                />
-                <button onClick={updateNote} style={{
-                    padding: '8px 20px',
-                    backgroundColor: '#27ae60',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer',
-                    marginRight: '10px'
-                }}>Save</button>
-                <button onClick={() => setEditId(null)} style={{
-                    padding: '8px 20px',
-                    backgroundColor: '#95a5a6',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer'
-                }}>Cancel</button>
-            </>
-        ) : (
-            // View Mode
-            <>
-                <h3 style={{margin: '0 0 10px 0', color: '#2c3e50'}}>{note.title}</h3>
+                        cursor: 'pointer'
+                    }}>Cancel</button>
+                </>
+            ) : (
+                // View Mode
+                <>
+                    <h3 style={{margin: '0 0 10px 0', color: '#2c3e50'}}>{note.title}</h3>
                 
-                {expandedId === note._id && (
-                    <p style={{
-                        margin: '10px 0',
-                        color: '#555',
-                        lineHeight: '1.6'
-                    }}>{note.content}</p>
-                )}
+                    {expandedId === note._id && (
+                        <p style={{
+                            margin: '10px 0',
+                            color: '#555',
+                            lineHeight: '1.6'
+                        }}>{note.content}</p>
+                    )}
                 
-                <div style={{display: 'flex', gap: '10px', marginTop: '15px'}}>
-                    <button 
-                        onClick={() => setExpandedId(expandedId === note._id ? null : note._id)}
-                        style={{
-                            padding: '8px 15px',
-                            backgroundColor: '#3498db',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '5px',
-                            cursor: 'pointer'
-                        }}
-                    >
-                        {expandedId === note._id ? 'Collapse' : 'Read More'}
-                    </button>
-                    <button 
-                        onClick={() => startEdit(note)}
-                        style={{
-                            padding: '8px 15px',
-                            backgroundColor: '#f39c12',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '5px',
-                            cursor: 'pointer'
-                        }}
-                    >Update</button>
-                    <button 
-                        onClick={() => deleteNote(note._id)}
-                        style={{
-                            padding: '8px 15px',
-                            backgroundColor: '#e74c3c',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '5px',
-                            cursor: 'pointer'
-                        }}
-                    >Delete</button>
-                </div>
-            </>
-        )}
-    </div>
-))}
-                </div>
-            ))}
+                    <div style={{display: 'flex', gap: '10px', marginTop: '15px'}}>
+                        <button 
+                            onClick={() => setExpandedId(expandedId === note._id ? null : note._id)}
+                            style={{
+                                padding: '8px 15px',
+                                backgroundColor: '#3498db',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '5px',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            {expandedId === note._id ? 'Collapse' : 'Read More'}
+                        </button>
+                        <button 
+                            onClick={() => startEdit(note)}
+                            style={{
+                                padding: '8px 15px',
+                                backgroundColor: '#f39c12',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '5px',
+                                cursor: 'pointer'
+                            }}
+                        >Update</button>
+                        <button 
+                            onClick={() => deleteNote(note._id)}
+                            style={{
+                                padding: '8px 15px',
+                                backgroundColor: '#e74c3c',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '5px',
+                                cursor: 'pointer'
+                            }}
+                        >Delete</button>
+                    </div>
+                </>
+            )}
+        </div>
+    ))}
         </div>
     </div>
 );
